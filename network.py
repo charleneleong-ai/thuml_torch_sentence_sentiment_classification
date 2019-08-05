@@ -198,11 +198,10 @@ class SelfAtt(nn.Module):
 
 		# M = [batchsize, sentence_length]
 		M = torch.squeeze(M)	# Removes a tensor with all the dimensions of input of size 1 removed.
-
-		I = torch.ones(batch_size, 1, 1).cuda()
 		
 		if add_penalization:
 			# batchsize, 1, 1
+			I = torch.ones(batch_size, 1, 1).cuda()
 			P = pow(torch.norm(torch.bmm(A, torch.transpose(A, 1, 2)) - I), 2)
 		else:
 			P = 0
